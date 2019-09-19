@@ -1,0 +1,140 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-title>
+      Tab One
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content >
+  <ion-grid>
+    <form [formGroup]="formGroupValidation" (ngSubmit)="onSubmit(formGroupValidation.value)">
+     
+      <ion-row>
+         <!--- First Name Section --->
+        <ion-col size="6">
+          <ion-item>
+            <ion-label position="floating">First Name <ion-text color="danger">*</ion-text>
+            </ion-label>
+            <ion-input required formControlName="firstname" type="text"></ion-input>
+          </ion-item>
+
+          <div class="validation-errors" *ngFor="let error of error_message.firstname">
+            <div class="error-message"
+              *ngIf="formGroupValidation.get('firstname').hasError(error.type) && (formGroupValidation.get('firstname').dirty || formGroupValidation.get('firstname').touched)">
+              <ion-icon name="information-circle-outline"></ion-icon> {{error.message}}
+            </div>
+          </div>
+        </ion-col>
+
+        <!--- Second Name Section --->
+        <ion-col size="6">
+          <ion-item>
+            <ion-label position="floating">Last Name <ion-text color="danger">*</ion-text>
+            </ion-label>
+            <ion-input required formControlName="lastname" type="text"></ion-input>
+          </ion-item>
+          <div class="validation-errors" *ngFor="let error of error_message.lastname">
+            <div class="error-message"
+              *ngIf="formGroupValidation.get('lastname').hasError(error.type) && (formGroupValidation.get('lastname').dirty || formGroupValidation.get('firstname').touched)">
+              <ion-icon name="information-circle-outline"></ion-icon> {{error.message}}
+            </div>
+          </div>
+
+        </ion-col>
+      </ion-row>
+
+      <!--- Email Section --->
+      <ion-row>
+        <ion-col>
+          <ion-item>
+            <ion-label position="floating">E-Mail <ion-text color="danger">*</ion-text>
+            </ion-label>
+            <ion-input required formControlName="email" type="email"></ion-input>
+          </ion-item>
+          <div class="validation-errors" *ngFor="let error of error_message.email">
+            <div class="error-message"
+              *ngIf="formGroupValidation.get('email').hasError(error.type) && (formGroupValidation.get('email').dirty || formGroupValidation.get('email').touched)">
+              <ion-icon name="information-circle-outline"></ion-icon> {{error.message}}
+            </div>
+          </div>
+        </ion-col>
+      </ion-row>
+
+      <!--- Password Section --->
+      <ion-row>
+        <ion-col>
+          <ion-item>
+            <ion-label position="floating">Password <ion-text color="danger">*</ion-text>
+            </ion-label>
+            <ion-input required formControlName="password" type="password"></ion-input>
+          </ion-item>
+          
+          <div class="validation-errors" *ngFor="let error of error_message.password">
+            <div class="error-message"
+              *ngIf="formGroupValidation.get('password').hasError(error.type) && (formGroupValidation.get('password').dirty || formGroupValidation.get('password').touched)">
+              <ion-icon name="information-circle-outline"></ion-icon> {{error.message}}
+            </div>
+          </div>
+        </ion-col>
+      </ion-row>
+
+      <!--- Gender Section --->
+      <ion-row>
+        <ion-col>
+            <ion-item>
+                <ion-label>Gender</ion-label>
+                <ion-select placeholder="Select Gender" formControlName="gender" >
+                  <ion-select-option *ngFor="let gender of genderList" [value]="gender">{{gender}}</ion-select-option>
+                </ion-select>
+              </ion-item>
+              <div class="validation-errors" *ngFor="let error of error_message.gender">
+                  <div class="error-message"
+                    *ngIf="formGroupValidation.get('gender').hasError(error.type) && (formGroupValidation.get('gender').dirty || formGroupValidation.get('gender').touched)">
+                    <ion-icon name="information-circle-outline"></ion-icon> {{error.message}}
+                  </div>
+                </div>
+        </ion-col>
+      </ion-row>
+
+         <!--- Phone Numbers --->
+      <ion-row>
+       
+          <ion-col >
+              <ion-item>
+                  <ion-label position="floating">Phone Number <ion-text color="danger">*</ion-text>
+                  </ion-label>
+                  <ion-input required formControlName="phoneNo" type="tel"></ion-input>
+                </ion-item>
+
+                <div class="validation-errors" *ngFor="let error of error_message.phoneNo">
+                    <div class="error-message"
+                      *ngIf="formGroupValidation.get('phoneNo').hasError(error.type) && (formGroupValidation.get('phoneNo').dirty || formGroupValidation.get('phoneNo').touched)">
+                      <ion-icon name="information-circle-outline"></ion-icon> {{error.message}}
+                    </div>
+                  </div>
+          </ion-col>
+        </ion-row>
+
+        <!--- Terms & Condictions Section --->
+      <ion-row>
+          <ion-col>
+                <ion-item>
+                    <ion-checkbox color="primary" slot="start" formControlName="terms"></ion-checkbox>
+                    <ion-label>Accept terms & condictions</ion-label>
+                  </ion-item>
+                <div class="validation-errors" *ngFor="let error of error_message.gender">
+                    <div class="error-message"
+                      *ngIf="formGroupValidation.get('terms').hasError(error.type) && (formGroupValidation.get('terms').dirty || formGroupValidation.get('terms').touched)">
+                      <ion-icon name="information-circle-outline"></ion-icon> {{error.message}}
+                    </div>
+                  </div>
+          </ion-col>
+        </ion-row>
+
+      <ion-button Expand="block" color="primary" type="submit" [disabled]="formGroupValidation.invalid">
+        Login
+      </ion-button>
+    </form>
+  </ion-grid>
+</ion-content>
